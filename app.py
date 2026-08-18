@@ -9,7 +9,7 @@ def get_vid(q):
         url = f"https://www.youtube.com/results?search_query={enc}"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         data = urllib.request.urlopen(req, timeout=5).read().decode()
-        ids = re.findall(r"\"videoId\":\"([^\"]+)\"", data)
+        ids = re.findall(r""videoId":"([^"]+)"", data)
         return ids[0] if ids else None
     except Exception:
         return None
@@ -48,7 +48,7 @@ def ai_agent_router():
     elif any(k in cmd for k in ["gmail", "email", "mail", "message"]):
         to, body = "", ""
         clean_cmd = re.sub(
-            r'^(please\s+)?(open\s+)?(gmail|email|mail|message)\s*',
+            r'^(pleases+)?(opens+)?(gmail|email|mail|message)s*',
             '',
             cmd
         ).strip()
